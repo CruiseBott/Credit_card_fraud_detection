@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/admin.css">
+    <script defer src="/static/script.js"></script>
+</head>
+<body>
+    <div class="hero">
+        <div class="overlay"></div>
+        <div class="container fade-in">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="handleAuth('login')">Login</button>
+
+            <p class="redirect">Don't have an account? <a href="/register">Register</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+# Virtual environment
+venv/
+env/
+
+# Bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Environment variables
+.env
+
+# Machine-specific files
+.DS_Store
+Thumbs.db
+
+# Render & Deployment-related
+instance/

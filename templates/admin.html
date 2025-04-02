@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script defer src="/static/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #2A2A72, #009FFD);
+            color: white;
+            transition: all 0.3s ease-in-out;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 20px;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .navbar button {
+            background: #FFD700;
+            color: #2A2A72;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .navbar button:hover {
+            background: #FFC107;
+            transform: scale(1.05);
+        }
+        .content {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease-in-out;
+            backdrop-filter: blur(15px);
+        }
+        h2 {
+            text-align: center;
+            color: #FFD700;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            transition: all 0.3s;
+            color: white;
+        }
+        th {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+        select, button {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        select {
+            border: 1px solid #FFD700;
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body onload="checkAdminAccess(); loadAdminPanel(); loadFraudTransactions();">
+    <div class="navbar">
+        <span>Admin Dashboard</span>
+        <div>
+            <button onclick="goToHome()"><i class="fas fa-home"></i> Go to Home</button>
+            <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <h2>Registered Users</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Change Role</th>
+                </tr>
+            </thead>
+            <tbody id="userTable">
+                <tr><td colspan="3">Loading...</td></tr>
+            </tbody>
+        </table>
+        <h2>Recent Fraud Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sr.no</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Merchant</th>
+                    <th>Fraud Probability</th>
+                </tr>
+            </thead>
+            <tbody id="transactionTable">
+                <tr><td colspan="5">Loading...</td></tr>
+            </tbody>
+        </table>
+        <div id="transactionDetails"></div>
+    </div>
+</body>
+</html>
