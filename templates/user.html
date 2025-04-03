@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-    <script defer src="/static/script.js"></script> <!-- Ensure script.js is linked -->
+    <script defer src="/static/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #2A2A72, #009FFD);
+            color: white;
+            transition: all 0.3s ease-in-out;
         }
 
         /* Navbar */
@@ -18,76 +21,143 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #007BFF;
-            padding: 10px 20px;
-            color: white;
-            font-size: 18px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .navbar span {
-            font-weight: bold;
-        }
-
-        .navbar .nav-links {
-            display: flex;
-            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 20px;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .navbar button {
-            background-color: transparent;
+            background: #FFD700;
+            color: #2A2A72;
             border: none;
-            color: white;
-            padding: 8px 12px;
+            padding: 10px 15px;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            margin-left: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
         }
 
         .navbar button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background: #FFC107;
+            transform: scale(1.05);
         }
 
         /* User Info */
         .user-info {
             max-width: 500px;
-            margin: 100px auto 20px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: white;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 120px auto 20px;
+            padding: 25px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             text-align: center;
+            backdrop-filter: blur(15px);
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .user-info h2 {
             margin-bottom: 10px;
+            color: #FFD700;
         }
 
         .user-info p {
             font-size: 18px;
-            color: #555;
+            color: white;
+        }
+
+        /* Project Info */
+        .project-info {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            backdrop-filter: blur(15px);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .project-info h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .project-info p {
+            font-size: 16px;
+            color: white;
+            line-height: 1.5;
+        }
+
+        .project-info h4 {
+            margin-top: 15px;
+            color: #FFD700;
+            font-size: 18px;
+            text-decoration: underline;
+        }
+
+        .project-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-info li {
+            font-size: 16px;
+            color: white;
+            margin: 8px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .project-info li:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+
     <!-- Navbar -->
     <div class="navbar">
         <span>User Dashboard</span>
-        <div class="nav-links">
-            <button onclick="goToHome()">🏠 Home</button>
-            <button onclick="logout()">🚪 Logout</button>
+        <div>
+            <button onclick="goToHome()"><i class="fas fa-home"></i> Home</button>
+            <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </div>
 
-    <!-- User Greeting -->
+    <!-- User Info -->
     <div class="user-info">
         <h2>Welcome, <span id="username">Loading...</span> 👋</h2>
         <p>You are logged in as a <strong>User</strong></p>
     </div>
+
+    <!-- Project Info -->
+    <div class="project-info">
+        <h3>Project: Credit Card Fraud Detection System</h3>
+        <p>
+            A web-based system leveraging machine learning to detect fraudulent transactions while ensuring security and user role management.
+        </p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li>🚀 Flask-based web application</li>
+            <li>📊 MongoDB integration</li>
+            <li>🔑 JWT authentication</li>
+            <li>👨‍💼 User & Admin dashboards</li>
+            <li>🤖 Fraud detection using XGBoost & scikit-learn</li>
+        </ul>
+    </div>
+
 </body>
 </html>

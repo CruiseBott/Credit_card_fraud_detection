@@ -217,6 +217,22 @@ function loadFraudTransactions() {
     })
     .catch(error => console.error("❌ Error loading fraud transactions:", error));
 }
+function checkUserRole() {
+    const role = localStorage.getItem("user_role");
+
+    if (!role) {
+        alert("⚠️ No user role found. Redirecting to login.");
+        window.location.href = "/login";
+        return;
+    }
+
+    if (role === "admin") {
+        window.location.href = "/admin";
+    } else {
+        window.location.href = "/user";
+    }
+}
+
 
 // ✅ Function to Display Transaction Details on Click
 function showTransactionDetails(index) {
