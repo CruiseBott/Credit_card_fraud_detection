@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fraud Detection System</title>
+    <title>Contact Us</title>
     <script defer src="/static/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -16,7 +16,6 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -27,11 +26,6 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 10px;
         }
 
         .navbar button {
@@ -50,11 +44,9 @@
             transform: scale(1.05);
         }
 
-        /* Main Container */
-        .container {
-            width: 60%;
-            max-width: 600px;
-            margin: 100px auto;
+        .contact-form {
+            max-width: 500px;
+            margin: 120px auto 20px;
             padding: 25px;
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.1);
@@ -64,54 +56,48 @@
             animation: fadeIn 0.5s ease-in-out;
         }
 
-        h2 {
+        .contact-form h2 {
+            margin-bottom: 10px;
             color: #FFD700;
         }
 
-        label {
+        .contact-form label {
             display: block;
-            margin-top: 10px;
-            color: white;
+            margin: 10px 0 5px;
+            font-weight: bold;
         }
 
-        input, button {
-            margin-top: 5px;
-            padding: 12px;
-            width: calc(100% - 24px);
-            border-radius: 5px;
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
             border: none;
-            display: block;
-            box-sizing: border-box;
-        }
-
-        input {
-            background-color: #2c2c2c;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
+            outline: none;
         }
 
-        input::placeholder {
-            color: #bbb;
+        .contact-form textarea {
+            height: 100px;
+            resize: none;
         }
 
-        button {
+        .contact-form button {
+            margin-top: 15px;
             background: #FFD700;
             color: #2A2A72;
-            font-weight: bold;
+            border: none;
+            padding: 10px 15px;
             cursor: pointer;
-            margin-top: 15px;
+            border-radius: 8px;
+            font-weight: bold;
             transition: background 0.3s, transform 0.2s;
         }
 
-        button:hover {
+        .contact-form button:hover {
             background: #FFC107;
             transform: scale(1.05);
-        }
-
-        #result {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 15px;
-            text-align: center;
         }
 
         @keyframes fadeIn {
@@ -121,41 +107,31 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
+
     <div class="navbar">
-        <span>Fraud Detection System</span>
-        <div class="nav-links">
-            <button onclick="contact()">Contact Us</button>
-            <button onclick="about()">About</button>
-            <button onclick="checkUserRole()">Go to Panel</button>
-            <button onclick="logout()">Logout</button>
+        <span>Contact Us</span>
+        <div>
+            <button onclick="goToHome()"><i class="fas fa-home"></i> Home</button>
+            <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </div>
 
-    <!-- Fraud Prediction Form -->
-    <div class="container">
-        <h2>Try Fraud Prediction</h2>
-
-        <label>Amount:</label>
-        <input type="number" id="amt" placeholder="Enter amount">
-
-        <label>Transaction Hour:</label>
-        <input type="number" id="trans_hour" placeholder="Enter transaction hour (0-23)">
-
-        <label>Transaction Day:</label>
-        <input type="number" id="trans_day" placeholder="Enter transaction day (0=Monday, 6=Sunday)">
-
-        <label>Merchant:</label>
-        <input type="text" id="merchant" placeholder="Enter merchant name">
-
-        <label>Category:</label>
-        <input type="text" id="category" placeholder="Enter transaction category">
-
-        <label>Gender:</label>
-        <input type="text" id="gender" placeholder="Enter gender (M/F)">
-
-        <button onclick="predictFraud()">Predict</button>
-        <p id="result"></p>
+    <div class="contact-form">
+        <h2>Get in Touch</h2>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+        <p id="status"></p>
     </div>
+
 </body>
 </html>

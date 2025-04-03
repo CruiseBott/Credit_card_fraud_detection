@@ -101,7 +101,7 @@
         }
     </style>
 </head>
-<body onload="checkAdminAccess(); loadAdminPanel(); loadFraudTransactions();">
+<body onload="checkAdminAccess(); loadAdminPanel(); loadFraudTransactions(); loadContactSubmissions()">
     <div class="navbar">
         <span>Admin Dashboard</span>
         <div>
@@ -140,6 +140,21 @@
             </tbody>
         </table>
         <div id="transactionDetails"></div>
+
+        <h2>Contact Submissions</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody id="contactTable">
+        <tr><td colspan="3">Loading...</td></tr>
+    </tbody>
+</table>
+
     </div>
 </body>
 </html>

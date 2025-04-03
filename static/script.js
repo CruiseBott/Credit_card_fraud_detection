@@ -2,9 +2,8 @@ const baseURL = "/api/auth"; // Adjust if your API path differs
 
 // ✅ Function to Get the Logged-in Username
 function getLoggedInUsername() {
-    console.log("🔍 Checking localStorage for username...");
     const username = localStorage.getItem("username");
-    console.log("📌 Retrieved username:", username);
+    
 
     return username || "Guest"; // Fallback to 'Guest'
 }
@@ -334,6 +333,13 @@ async function predictFraud() {
     }
 }
 
+function about() {
+    window.location.href = "/about"; // Change to your contact page URL
+}
+
+function contact() {
+    window.location.href = "/contact";
+}
 
 
 function goToHome() {
@@ -368,3 +374,70 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Failed to update username. Either username is null or element is not found.");
     }
 });
+
+
+document.getElementById("contactForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+    });
+
+    const result = await response.json();
+    document.getElementById("status").textContent = result.message;
+});
+
+
+async function loadContactSubmissions() {
+    console.log("Running loadContactSubmissions()");  // Debugging log
+
+    try {
+        const response = await fetch("/api/admin/contacts");
+        console.log("Fetch response status:", response.status); // Log response status
+
+        const contacts = await response.json();
+        console.log("Fetched contacts:", contacts); // Log data received
+
+        const table = document.getElementById("contactTable");
+        table.innerHTML = ""; // Clear the 'Loading...' text
+
+        if (!contacts || contacts.length === 0) {
+            console.log("No contacts found");
+            table.innerHTML = "<tr><td colspan='3'>No submissions yet.</td></tr>";
+            return;
+        }
+
+        contacts.forEach(contact => {
+            console.log("Adding row:", contact); // Log each contact before adding
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${contact.name || "N/A"}</td>
+                <td>${contact.email || "N/A"}</td>
+                <td>${contact.message || "N/A"}</td>
+            `;
+            table.appendChild(row);
+        });
+
+        console.log("Table updated successfully");
+    } catch (error) {
+        console.error("Error fetching contacts:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded, calling loadContactSubmissions()");  
+    loadContactSubmissions();
+});
+
+
+// Call the function when admin page loads
+window.onload = () => {
+    checkAdminAccess();
+    loadContactSubmissions();
+};
